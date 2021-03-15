@@ -19,13 +19,22 @@
       </div>
       <div class="mx-6">
         <v-text-field
+          v-if="step===1"
           v-model="title"
           outlined
           placeholder="Title"
         ></v-text-field>
 
-        <v-textarea v-model="description" outlined placeholder="Description">
+        <v-textarea v-model="description" outlined placeholder="Description" v-if="step===1">
         </v-textarea>
+        <v-file-input
+          v-if="step===2"
+          label="File input"
+          multiple
+          filled
+          prepend-icon="mdi-camera"
+        >
+        </v-file-input>  
 
         <div style="text-align:center">
           <v-btn @click="next" :loading="isLoading" class="mb-5">
