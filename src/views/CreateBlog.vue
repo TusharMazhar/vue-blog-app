@@ -4,7 +4,7 @@
        <p style="text-align:center;font-size:25px;color:green;font-weight:bold"> Create New Blog </p>
     </div>
     <v-card class="mx-auto my-12" max-width="600">
-      <v-snackbar v-model="snackbar" :timeout="timeout">
+      <v-snackbar v-model="snackbar" :timeout="timeout"  multi-line>
         {{ text }}
 
         <template v-slot:action="{ attrs }">
@@ -38,7 +38,6 @@
             label="File input"
             filled
             ref="field"
-  
             prepend-icon="mdi-camera"
           >
         </v-file-input> 
@@ -73,7 +72,7 @@
 
 
         <div style="text-align:center">
-          <v-btn @click="prev"  class="mb-5" v-if="step>1 && step<3" style="margin-right:10px">
+          <v-btn @click="prev"  class="mb-5" v-if="step>1 && step<=3" style="margin-right:10px">
             Prev
           </v-btn>
           <v-btn @click="next"  class="mb-5"  v-if="step<3">
@@ -108,15 +107,21 @@ export default {
   },
   methods:{
     next(){
+      this.$refs.field.focus()
       if(this.$refs.field.validate()){
             this.step++
       }
-
-      
        
     },
     save(){
-       this.$router.push('/')
+
+      this.snackbar = true
+      this.text = "Blog Saved Successfully"
+
+      setTimeout(()=>{
+        this.$router.push('/')
+      },3000)
+       
     },
     prev(){
        this.step--
