@@ -1,11 +1,15 @@
 <template>
   <div class="home">
-
-       <div>
-         <router-link to="/create-blog">Create Blog</router-link>
-       </div>
        <v-container>
-          <div >
+
+          <div style="margin:10px 10px;">
+            <router-link to="/create-blog" style="text-decoration:none"><v-btn color="pink white--text" > Create New</v-btn></router-link>
+          </div>
+
+       </v-container>
+     
+       <v-container>
+          <div style="margin-bottom:10px">
                 <h1 style="text-align:center">All Blogs</h1>
           </div>
           
