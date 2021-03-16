@@ -31,7 +31,7 @@
 
         <v-textarea v-model="description" outlined placeholder="Description" ref="field" :rules="descriptionRules" v-if="step===1">
         </v-textarea>
-        <div >
+
           <v-file-input
             v-model="images"
             v-if="step===2"
@@ -42,8 +42,55 @@
             ref="field"
             prepend-icon="mdi-camera"
           >
-        </v-file-input> 
-        </div>
+         </v-file-input> 
+         <v-file-input
+            v-model="image2"
+            v-if="step===2 && images.length===1 "
+            label="Image Upload"
+            filled
+            multiple
+            :rules="imageRules"
+            ref="field"
+            prepend-icon="mdi-camera"
+          >
+         </v-file-input> 
+         <v-file-input
+            v-model="image3"
+            v-if="step===2 && image2.length===1 "
+            label="Image Upload"
+            filled
+            multiple
+            :rules="imageRules"
+            ref="field"
+            prepend-icon="mdi-camera"
+          >
+         </v-file-input> 
+         <v-file-input
+            v-model="image4"
+            v-if="step===2 && image3.length===1 "
+            label="Image Upload"
+            filled
+            multiple
+            :rules="imageRules"
+            ref="field"
+            prepend-icon="mdi-camera"
+          >
+         </v-file-input>
+         <v-file-input
+            v-model="image5"
+            v-if="step===2 && image4.length===1 "
+            label="Image Upload"
+            filled
+            multiple
+            :rules="imageRules"
+            ref="field"
+            prepend-icon="mdi-camera"
+          >
+         </v-file-input>
+
+
+        
+
 
         <v-card
             flat
@@ -61,7 +108,7 @@
             <v-img
               v-for="i in images" :key="i.index"
               :src='i.name'
-              height="60"
+              height="100"
             ></v-img>
         
             <v-card-text>
@@ -77,7 +124,7 @@
           <v-btn @click="next"  class="mb-5"  v-if="(step===1|| step===2) && images.length===0 ">
             Next 
           </v-btn>
-          <v-btn @click="step++"  class="mb-5"  v-else-if="step!=3">
+          <v-btn @click="next2"  class="mb-5"  v-else-if="step!=3">
             Next
           </v-btn>
           <v-btn @click="save"  class="mb-5" v-if="step===3">
@@ -97,7 +144,11 @@ export default {
         titleRules:[ v => v.length>0 || 'Min 1 Charcter'],
         descriptionRules: [v => v.length >100 || 'Min 100 characters'],
         imageRules:[() =>this.images.length>0   || 'Minimum 1  or Maximum 5 images You will be able to select'],
-        images:'',
+        images:[],
+        image2:[],
+        image3:[],
+        image4:[],
+        image5:[],
         title: '',
         description: '',
         snackbar: false,
@@ -112,10 +163,12 @@ export default {
     
       if(this.$refs.field.validate()){
           this.step++
-      } 
-
-      
-       
+      }        
+    },
+    next2(){
+        this.$store.state.images.push(this.images)
+        console.log('store',this.$store.state.images[0])
+        this.step++
     },
     save(){
       console.log(this.images[0].name)
