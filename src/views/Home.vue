@@ -19,13 +19,14 @@
           class="mx-auto"
           max-width="200"
         >
-            <v-img
+            <img
+              v-for="img in blog.images" :key="img.index"
               class="white--text align-end"
               height="200px"
-              src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-            >
-              <v-card-title>{{blog.title}}</v-card-title>
-            </v-img>
+              :src='img'
+            />
+              <v-card-title style="color:green">{{blog.title}}</v-card-title>
+            
         
             <v-card-text class="text--primary">
               <div>{{blog.description}}</div>

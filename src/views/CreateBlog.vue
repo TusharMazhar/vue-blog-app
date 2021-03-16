@@ -95,24 +95,23 @@
           prepend-icon="mdi-camera"
         >
         </v-file-input>
-
         <v-card
           flat
           v-if="step===3"
           max-width="344"
           class="mx-auto"
         > 
-          {{uploadImage}}
-    
+
           <v-list-item>
-            <v-list-item-avatar color="grey"></v-list-item-avatar>
             <v-list-item-content>
-              <v-list-item-title class="headline">{{title}}</v-list-item-title>
+              <v-list-item-title class="headline" style="color:green">{{title}}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         
-          <v-img
-            src='../assets/th.jpg'
+          <img
+            v-for="img in inputImages" :key="img.index"
+            style="margin-left:10px"
+            :src='img'
             height="100"
           />
         
@@ -161,7 +160,7 @@ export default {
       snackbar: false,
       step:1,
       text: '',
-      timeout: 5000
+      timeout: 5000,
     }
   },
   methods:{
@@ -172,17 +171,18 @@ export default {
       }        
     },
     next2(){
+      this.inputImages=[this.image1,this.image2,this.image3,this.image4,this.image5]
       this.uploadImage = this.image1[0].name || null
       this.step++
     },
     save(){
-      this.inputImages=[this.image1,this.image2,this.image3,this.image4,this.image5]
       this.inputImages.forEach(item=>{
         if(item!=0 ){
           this.images.push(item[0].name)
         }
       })
-      console.log('images',this.images)
+      console.log('Vuex',this.images)
+      console.log('preview',this.inputImages)
       this.$store.state.blogs.push({title:this.title,description:this.description,images:this.images})
       this.snackbar = true
       this.text = "Blog Saved Successfully"
@@ -193,7 +193,7 @@ export default {
     },
     prev(){
       this.step--
-    }
+    },
   }
 
 }
