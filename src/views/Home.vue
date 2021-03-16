@@ -3,14 +3,14 @@
        <v-container>
 
           <div style="margin:10px 10px;">
-            <router-link to="/create-blog" style="text-decoration:none"><v-btn color="pink white--text" > Create New</v-btn></router-link>
+            <router-link to="/create-blog" style="text-decoration:none"><v-btn color="pink white--text" > Create New Blog</v-btn></router-link>
           </div>
 
        </v-container>
      
        <v-container>
           <div style="margin-bottom:10px">
-                <h1 style="text-align:center">All Blogs</h1>
+                <h1 style="text-align:center" v-if="blogs.length!=0">All Blogs</h1>
           </div>
           
           <v-row v-if="blogs.length>0">
@@ -29,7 +29,7 @@
             </v-img>
         
             <v-card-text class="text--primary">
-              <div>{{blog.des}}</div>
+              <div>{{blog.description}}</div>
             </v-card-text>
         
           </v-card>
@@ -37,8 +37,11 @@
             </v-col>
             
           </v-row> 
-          <v-row v-else>
-             <p>No Blog created</p>
+          <v-row v-else style="margin-top:10px">
+            <div style="margin:auto">
+                <p style="font-size:30px;font-weight:bold;color:red;text-align:center">No Blog Created</p>
+            </div>
+             
           </v-row> 
           
        </v-container>
@@ -52,16 +55,12 @@ export default {
   name: 'Home',
   data(){
     return{
-      blogs:[
-        {id:1,title:'python 3',des:'asdfgdfghfhgfjfjgj'},
-        {id:2,title:'python 3',des:'asdfgdfghfhgfjfjgj'},
-        {id:3,title:'python 3',des:'asdfgdfghfhgfjfjgj'},
-        {id:4,title:'python 3',des:'asdfgdfghfhgfjfjgj'},
-        {id:5,title:'python 3',des:'asdfgdfghfhgfjfjgj'},
-        {id:6,title:'python 3',des:'asdfgdfghfhgfjfjgj'},
-
-      ]
+      blogs: this.$store.state.blogs
+          
     }
+  },
+  created(){
+   
   }
 }
 </script>

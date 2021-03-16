@@ -31,16 +31,19 @@
 
         <v-textarea v-model="description" outlined placeholder="Description" ref="field" :rules="descriptionRules" v-if="step===1">
         </v-textarea>
-
+        <div >
           <v-file-input
             v-model="images"
-            v-if="step===2 && images.length>=0"
-            label="File input"
+            v-if="step===2"
+            label="Image Upload"
             filled
+            multiple
+            :rules="imageRules"
             ref="field"
             prepend-icon="mdi-camera"
           >
         </v-file-input> 
+        </div>
 
         <v-card
             flat
@@ -56,30 +59,28 @@
             </v-list-item>
         
             <v-img
-              src="https://cdn.vuetifyjs.com/images/cards/mountain.jpg"
-              height="194"
+              v-for="i in images" :key="i.index"
+              :src='i.name'
+              height="60"
             ></v-img>
         
             <v-card-text>
                {{description}}
             </v-card-text>
-        
-
       
         </v-card>
 
-
-
-
         <div style="text-align:center">
-          <v-btn @click="prev"  class="mb-5" v-if="step>1 && step<=3" style="margin-right:10px">
+          <v-btn @click="prev"  class="mb-5" v-if="step>1 && step<4" style="margin-right:10px">
             Prev
           </v-btn>
-          <v-btn @click="next"  class="mb-5"  v-if="step<3">
+          <v-btn @click="next"  class="mb-5"  v-if="(step===1|| step===2) && images.length===0 ">
+            Next 
+          </v-btn>
+          <v-btn @click="step++"  class="mb-5"  v-else-if="step!=3">
             Next
           </v-btn>
-     
-          <v-btn @click="save"  class="mb-5" v-else>
+          <v-btn @click="save"  class="mb-5" v-if="step===3">
             Save
           </v-btn>
         </div>
@@ -95,8 +96,8 @@ export default {
       return {
         titleRules:[ v => v.length>0 || 'Min 1 Charcter'],
         descriptionRules: [v => v.length >100 || 'Min 100 characters'],
- 
-        images:[],
+        imageRules:[() =>this.images.length>0   || 'Minimum 1  or Maximum 5 images You will be able to select'],
+        images:'',
         title: '',
         description: '',
         snackbar: false,
@@ -108,12 +109,17 @@ export default {
   methods:{
     next(){
       this.$refs.field.focus()
+    
       if(this.$refs.field.validate()){
-            this.step++
-      }
+          this.step++
+      } 
+
+      
        
     },
     save(){
+      console.log(this.images[0].name)
+      this.$store.state.blogs.push({title:this.title,description:this.description})
 
       this.snackbar = true
       this.text = "Blog Saved Successfully"
