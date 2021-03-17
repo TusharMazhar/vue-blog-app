@@ -53,7 +53,7 @@
           multiple
           :rules="imageRules"
           ref="field"
-          @change="onAddFiles2"
+          @change="onAddFiles1"
           prepend-icon="mdi-camera"
         >
         </v-file-input> 
@@ -63,6 +63,7 @@
           label="Image Upload"
           filled
           multiple
+          @change="onAddFiles2"
           :rules="imageRules"
           ref="field"
           prepend-icon="mdi-camera"
@@ -74,6 +75,7 @@
           label="Image Upload"
           filled
           multiple
+          @change="onAddFiles3"
           :rules="imageRules"
           ref="field"
           prepend-icon="mdi-camera"
@@ -85,6 +87,7 @@
           label="Image Upload"
           filled
           multiple
+          @change="onAddFiles4"
           :rules="imageRules"
           ref="field"
           prepend-icon="mdi-camera"
@@ -108,7 +111,25 @@
             height="100"
           />
           <img
+            v-for="src in previews1" :key="src.index"
+            style="margin-left:10px"
+            :src="src"
+            height="100"
+          />
+          <img
             v-for="src in previews2" :key="src.index"
+            style="margin-left:10px"
+            :src="src"
+            height="100"
+          />
+          <img
+            v-for="src in previews3" :key="src.index"
+            style="margin-left:10px"
+            :src="src"
+            height="100"
+          />
+          <img
+            v-for="src in previews4" :key="src.index"
             style="margin-left:10px"
             :src="src"
             height="100"
@@ -140,8 +161,10 @@ export default {
   data() {
     return {
       previews: [],
+      previews1: [],
       previews2: [],
-      // errorImage: "url of an image to use to indicate an error",
+      previews3: [],
+      previews4: [],
       titleRules:[ v => v.length>0 || 'Min 1 Charcter'],
       descriptionRules: [v => v.length >100 || 'Min 100 characters'],
       imageRules:[() =>this.image1.length>0   || 'Minimum 1  or Maximum 5 image1 You will be able to select'],
@@ -152,7 +175,6 @@ export default {
       image5:[],
       images:[],
       uploadImage:null,
-      inputImages:[],
       title: '',
       description: '',
       snackbar: false,
@@ -170,11 +192,35 @@ export default {
         reader.readAsDataURL(file);
       })
     },
-     onAddFiles2(files) {
+    onAddFiles1(files) {
+    this.previews1 = [];
+    files.forEach((file, index) => {
+        const reader = new FileReader();
+        reader.addEventListener('load', e => this.previews1[index] = e.target.result);
+        reader.readAsDataURL(file);
+      })
+    },
+    onAddFiles2(files) {
     this.previews2 = [];
     files.forEach((file, index) => {
         const reader = new FileReader();
         reader.addEventListener('load', e => this.previews2[index] = e.target.result);
+        reader.readAsDataURL(file);
+      })
+    },
+    onAddFiles3(files) {
+    this.previews3 = [];
+    files.forEach((file, index) => {
+        const reader = new FileReader();
+        reader.addEventListener('load', e => this.previews3[index] = e.target.result);
+        reader.readAsDataURL(file);
+      })
+    },
+    onAddFiles4(files) {
+    this.previews4 = [];
+    files.forEach((file, index) => {
+        const reader = new FileReader();
+        reader.addEventListener('load', e => this.previews4[index] = e.target.result);
         reader.readAsDataURL(file);
       })
     },
@@ -185,18 +231,13 @@ export default {
       }        
     },
     next2(){
-      this.inputImages=[this.image1,this.image2,this.image3,this.image4,this.image5]
       this.step++
       console.log('preview',this.previews)
     },
     save(){
-      this.inputImages.forEach(item=>{
-        if(item!=0 ){
-          this.images.push(item[0].name)
-        }
-      })
+      
+      this.images.push(this.previews,this.previews1,this.previews2,this.previews3,this.previews4)
       console.log('Vuex',this.images)
-      console.log('preview',this.inputImages)
       this.$store.state.blogs.push({title:this.title,description:this.description,images:this.images})
       this.snackbar = true
       this.text = "Blog Saved Successfully"
