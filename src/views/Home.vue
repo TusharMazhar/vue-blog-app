@@ -22,75 +22,23 @@
           <span v-for="img in blog.images" :key="img.index">
             <img
               style="padding:0px 3px;margin-left:17px;margin-top:10px"
-              v-if="img!=''"
+              v-if="img!='' && img!=null && img.length<2"
               class="white--text align-end"
               height="100px"
               width="150px"
               :src='img'
-            />           
-          </span>
-
-          <span v-if="blog.images[0].length>0">
-            <span v-for="img in blog.images[0]" :key="img.index">
-                <img
-                  style="padding:0px 3px;margin-left:17px;margin-top:10px"
-                  v-if="img!=''"
-                  class="white--text align-end"
-                  height="100px"
-                  width="150px"
-                  :src='img'
-                />
-            </span>
-            <span v-for="img in blog.images[1]" :key="img.index">
-                <img
-                  style="padding:0px 3px;margin-left:17px;margin-top:10px"
-                  v-if="img!=''"
-                  class="white--text align-end"
-                  height="100px"
-                  width="150px"
-                  :src='img'
-                />
-            </span>
-            <!-- <span v-for="img in blog.images[1]" :key="img.index">
-                <img
-                  v-if="img!=''"
-                  class="white--text align-end"
-                  height="100px"
-                  width="100px"
-                  :src='img'
-                />
-            </span>
-            <span v-for="img in blog.images[2]" :key="img.index">
-                <img
-                  v-if="img!=''"
-                  class="white--text align-end"
-                  height="100px"
-                  width="100px"
-                  :src='img'
-                />
-            </span>
-            <span v-for="img in blog.images[3]" :key="img.index">
-                <img
-                  v-if="img!=''"
-                  class="white--text align-end"
-                  height="100px"
-                  width="100px"
-                  :src='img'
-                />
-            </span>
-            <span v-for="img in blog.images[4]" :key="img.index">
-                <img
-                  v-if="img!=''"
-                  class="white--text align-end"
-                  height="100px"
-                  width="100px"
-                  :src='img'
-                />
-            </span> -->
+            />  
+            <img
+             v-for="i in img" :key="i.index"
+              style="padding:0px 3px;margin-left:17px;margin-top:10px"
+              v-else
+              class="white--text align-end"
+              height="100px"
+              width="150px"
+              :src='i'
+            />          
           </span>
             <v-card-title style="color:green">{{blog.title}}</v-card-title>
-            
-        
             <v-card-text class="text--primary">
               <div>{{blog.description}}</div>
             </v-card-text>

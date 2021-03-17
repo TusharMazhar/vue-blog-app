@@ -241,9 +241,7 @@ export default {
       console.log('preview',this.previews)
     },
     save(){
-
-      console.log('image i arra',this.image1.length)
-      
+    
       this.images.push(this.previews,this.previews1,this.previews2,this.previews3,this.previews4)
       console.log('Vuex',this.images)
       this.$store.state.blogs.push({title:this.title,description:this.description,images:this.images})
