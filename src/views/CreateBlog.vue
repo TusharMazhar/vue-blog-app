@@ -196,7 +196,6 @@ export default {
         reader.addEventListener('load', e => this.previews[index] = e.target.result);
         reader.readAsDataURL(file);
       })
-    console.log('previews length',this.previews.length)
     },
     onAddFiles1(files) {
     this.previews1 = [];
@@ -238,12 +237,9 @@ export default {
     },
     next2(){
       this.step++
-      console.log('preview',this.previews)
     },
     save(){
-    
       this.images.push(this.previews,this.previews1,this.previews2,this.previews3,this.previews4)
-      console.log('Vuex',this.images)
       this.$store.state.blogs.push({title:this.title,description:this.description,images:this.images})
       this.snackbar = true
       this.text = "Blog Saved Successfully"
