@@ -3,7 +3,7 @@
     <div style="margin-top:20px">
       <p style="text-align:center;font-size:25px;color:green;font-weight:bold"> Create New Blog </p>
     </div>
-    <v-card class="mx-auto my-12" max-width="600">
+    <v-card class="mx-auto my-12" max-width="900">
       <v-snackbar v-model="snackbar" :timeout="timeout"  multi-line>
         {{ text }}
         <template v-slot:action="{ attrs }">
@@ -96,7 +96,7 @@
         <v-card
           flat
           v-if="step===3"
-          max-width="344"
+          max-width="800"
           class="mx-auto"
         > 
           <v-list-item>
