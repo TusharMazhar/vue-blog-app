@@ -1,7 +1,7 @@
 <template>
   <div>
     <div style="margin-top:20px">
-      <p style="text-align:center;font-size:25px;color:green;font-weight:bold"> Create New Blog </p>
+      <p style="text-align:center;font-size:25px;color:green;font-weight:bold" v-if="step<3"> Create New Blog </p>
     </div>
     <v-card class="mx-auto my-12" max-width="900">
       <v-snackbar v-model="snackbar" :timeout="timeout"  multi-line>
