@@ -47,7 +47,7 @@
         </v-file-input> 
         <v-file-input
           v-model="image2"
-          v-if="step===2 && image1.length===1 "
+          v-if="step===2 && image1.length>=1 "
           label="Image Upload"
           filled
           multiple
@@ -59,7 +59,7 @@
         </v-file-input> 
         <v-file-input
           v-model="image3"
-          v-if="step===2 && image2.length===1 "
+          v-if="step===2 && image2.length>=1 "
           label="Image Upload"
           filled
           multiple
@@ -71,7 +71,7 @@
         </v-file-input> 
         <v-file-input
           v-model="image4"
-          v-if="step===2 && image3.length===1 "
+          v-if="step===2 && image3.length>=1 "
           label="Image Upload"
           filled
           multiple
@@ -83,7 +83,7 @@
         </v-file-input>
         <v-file-input
           v-model="image5"
-          v-if="step===2 && image4.length===1 "
+          v-if="step===2 && image4.length>=1 "
           label="Image Upload"
           filled
           multiple
@@ -196,6 +196,7 @@ export default {
         reader.addEventListener('load', e => this.previews[index] = e.target.result);
         reader.readAsDataURL(file);
       })
+    console.log('previews length',this.previews.length)
     },
     onAddFiles1(files) {
     this.previews1 = [];
@@ -240,6 +241,8 @@ export default {
       console.log('preview',this.previews)
     },
     save(){
+
+      console.log('image i arra',this.image1.length)
       
       this.images.push(this.previews,this.previews1,this.previews2,this.previews3,this.previews4)
       console.log('Vuex',this.images)
