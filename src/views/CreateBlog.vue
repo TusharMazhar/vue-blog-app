@@ -108,31 +108,36 @@
             v-for="src in previews" :key="src.index"
             style="margin-left:10px"
             :src="src"
-            height="100"
+            height="100px"
+            width="100px"
           />
           <img
             v-for="src in previews1" :key="src.index"
             style="margin-left:10px"
             :src="src"
-            height="100"
+            height="100px"
+            width="100px"
           />
           <img
             v-for="src in previews2" :key="src.index"
             style="margin-left:10px"
             :src="src"
-            height="100"
+            height="100px"
+            width="100px"
           />
           <img
             v-for="src in previews3" :key="src.index"
             style="margin-left:10px"
             :src="src"
-            height="100"
+            height="100px"
+            width="100px"
           />
           <img
             v-for="src in previews4" :key="src.index"
             style="margin-left:10px"
             :src="src"
-            height="100"
+            height="100px"
+            width="100px"
           />
           <v-card-text>
             {{description}}

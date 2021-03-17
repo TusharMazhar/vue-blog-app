@@ -14,17 +14,20 @@
       
       <v-row v-if="blogs.length>0">
 
-        <v-col  v-for="blog in blogs" :key="blog.id">
+        <div  v-for="blog in blogs" :key="blog.id" style="margin-left:20px">
           <v-card
           class="mx-auto"
           max-width="200"
         >
+          <span v-for="img in blog.images" :key="img.index">
             <img
-              v-for="img in blog.images" :key="img.index"
+              v-if="img!=''"
               class="white--text align-end"
-              height="200px"
+              height="100px"
+              width="100px"
               :src='img'
             />
+          </span>
               <v-card-title style="color:green">{{blog.title}}</v-card-title>
             
         
@@ -32,7 +35,7 @@
               <div>{{blog.description}}</div>
             </v-card-text>
           </v-card>
-        </v-col>
+        </div>
         
       </v-row> 
       <v-row v-else style="margin-top:10px">
