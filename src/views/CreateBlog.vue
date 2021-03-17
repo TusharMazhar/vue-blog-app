@@ -172,7 +172,7 @@ export default {
       previews4: [],
       titleRules:[ v => v.length>0 || 'Min 1 Charcter'],
       descriptionRules: [v => v.length >100 || 'Min 100 characters'],
-      imageRules:[() =>this.image1.length>0   || 'Minimum 1  or Maximum 5 image1 You will be able to select'],
+      imageRules:[() =>this.image1.length>0   || 'Should not Be Empty'],
       image1:[],
       image2:[],
       image3:[],
