@@ -17,7 +17,7 @@
         <div  v-for="blog in blogs" :key="blog.id" style="margin-left:20px;margin-bottom:15px" >
           <v-card
           class="mx-auto"
-          max-width="350"
+          width="350"
         >
           <span v-for="img in blog.images" :key="img.index">
             <img
